@@ -96,7 +96,7 @@ const HomeCurriculum = () => {
   const currentCourses = isSenior ? seniorCourses : juniorCourses;
 
   return (
-    <section className="w-full pt-24 pb-12 bg-zinc-950 font-sans" aria-label="Course Curriculum">
+    <section id="courses" className="w-full pt-24 pb-12 bg-zinc-950 font-sans" aria-label="Course Curriculum">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* HEADER */}
