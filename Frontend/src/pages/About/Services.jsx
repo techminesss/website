@@ -3,12 +3,12 @@ import React from 'react';
 // You can replace these with your actual logo imports
 // import logo1 from '../../assets/logos/logo1.png';
 const PARTNERS = [
-  { name: 'Pfizer', id: 1, logo: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Pfizer_%282021%29.svg' },
-  { name: 'GSK', id: 2, logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/GSK_logo_2022.svg' },
-  { name: 'Merck', id: 3, logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Merck_%26_Co-Logo.svg/1280px-Merck_%26_Co-Logo.svg.png' },
-  { name: 'GitHub', id: 4, logo: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg' },
+  { name: 'CBSE', id: 1, logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/9/95/CBSE_new_logo.svg/1200px-CBSE_new_logo.svg.png' },
+  { name: 'Arduino', id: 2, logo: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Arduino_Logo.svg' },
+  { name: 'Python', id: 3, logo: 'https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg' },
+  { name: 'Raspberry Pi', id: 4, logo: 'https://upload.wikimedia.org/wikipedia/en/c/cb/Raspberry_Pi_Logo.svg' },
   { name: 'Microsoft', id: 5, logo: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg' },
-  { name: 'Oracle', id: 6, logo: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg' },
+  { name: 'Google', id: 6, logo: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg' },
 ];
 
 export default function Partners() {
@@ -72,7 +72,7 @@ export default function Partners() {
 
         {/* --- Review Badge (From Reference) --- */}
         <div className="mt-16 flex justify-center">
-          <div className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-2 backdrop-blur-sm transition-colors hover:border-[#ff5e00]/50 hover:bg-[#ff5e00]/10">
+          <a href="/#testimonials" className="flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-6 py-2 backdrop-blur-sm transition-colors hover:border-[#ff5e00]/50 hover:bg-[#ff5e00]/10 cursor-pointer">
             <span className="text-sm font-bold text-white">4.9</span>
             <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -82,7 +82,7 @@ export default function Partners() {
               ))}
             </div>
             <span className="text-xs text-white/60">Read client feedback</span>
-          </div>
+          </a>
         </div>
 
       </div>

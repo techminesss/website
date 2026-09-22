@@ -101,7 +101,7 @@ const FdpPage = () => {
           <button onClick={() => document.getElementById('b2b-form').scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(37,99,235,0.3)]">
             Request a Proposal
           </button>
-          <button className="px-8 py-4 bg-zinc-900 border border-zinc-700 text-white font-semibold rounded-xl hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
+          <button onClick={() => document.getElementById('b2b-form').scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-zinc-900 border border-zinc-700 text-white font-semibold rounded-xl hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
             <Download size={18} className="text-zinc-400" /> View Syllabus
           </button>
         </motion.div>

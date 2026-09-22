@@ -1,11 +1,12 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 // --- STANDARD IMPORTS (Load Immediately) ---
 // We keep Navbar, Footer, and Home standard so the site structure loads instantly.
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home/Home';
 import ScrollToTop from './Scroll';
+import NotFound from './pages/NotFound';
 
 import './App.css';
 
@@ -44,9 +45,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/careers" element={<Careers />} />
               {/* These trigger the download when clicked */}
-              <Route path="/pages" element={<About />} />
-              <Route path="/Showcase" element={<Showcase />} />
-              <Route path="/blog" element={<About />} />
+              <Route path="/showcase" element={<Showcase />} />
+              <Route path="/Showcase" element={<Navigate to="/showcase" replace />} />
+              <Route path="/blog" element={<Navigate to="/showcase" replace />} />
               <Route path="/about" element={<About />} />
              
            
@@ -59,7 +60,7 @@ function App() {
               <Route path="/schools/labs" element={<SchoolLabs />} />
               <Route path="/demo-booking" element={<DemoBookingPage />} />
               
-              <Route path="*" element={<Home />} /> {/* Fallback to Home for unknown routes */}
+              <Route path="*" element={<NotFound />} /> {/* Fallback to 404 for unknown routes */}
             </Routes>
           </Suspense>
         </main>

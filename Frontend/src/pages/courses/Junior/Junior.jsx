@@ -6,6 +6,7 @@ import {
   Palette, PlayCircle, Terminal, Globe
 } from "lucide-react";
 import CourseModal from "../CourseModal"; 
+import DemoBookingModal from "../../../components/DemoBookingModal";
 
 const JuniorCard = ({ title, tool, shortDesc, image, gradient, tag, onClick }) => {
   return (
@@ -40,10 +41,11 @@ const JuniorCard = ({ title, tool, shortDesc, image, gradient, tag, onClick }) =
 
 const JuniorSyllabus = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [returnPath, setReturnPath] = useState(null); // <-- NEW: Holds the return ticket
+  const [returnPath, setReturnPath] = useState(null); 
   const location = useLocation();
-const [savedScroll, setSavedScroll] = useState(0); // <-- YOU MISSED THIS LINE!
-  const navigate = useNavigate(); // <-- NEW: Let's us navigate the user
+  const [savedScroll, setSavedScroll] = useState(0); 
+  const navigate = useNavigate(); 
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const tracks = [
     {
@@ -474,15 +476,17 @@ const [savedScroll, setSavedScroll] = useState(0); // <-- YOU MISSED THIS LINE!
       });
 
       if (foundCourse) {
-        setSelectedCourse(foundCourse);
-        
-        // Grab the Return Ticket AND the Scroll Position!
-        if (location.state.returnPath) {
-           setReturnPath(location.state.returnPath);
-        }
-        if (location.state.savedScroll !== undefined) {
-           setSavedScroll(location.state.savedScroll); // <-- ADD THIS LINE!
-        }
+        setTimeout(() => {
+          setSelectedCourse(foundCourse);
+          
+          // Grab the Return Ticket AND the Scroll Position!
+          if (location.state.returnPath) {
+             setReturnPath(location.state.returnPath);
+          }
+          if (location.state.savedScroll !== undefined) {
+             setSavedScroll(location.state.savedScroll); 
+          }
+        }, 0);
         
         window.history.replaceState({}, document.title); // Clears state
       }
@@ -548,13 +552,16 @@ const [savedScroll, setSavedScroll] = useState(0); // <-- YOU MISSED THIS LINE!
 
       <div className="fixed bottom-8 left-0 right-0 z-50 px-6 pointer-events-none">
         <div className="max-w-xl mx-auto pointer-events-auto">
-            <div className="bg-zinc-900/90 backdrop-blur-xl border border-white/10 p-2 rounded-full shadow-2xl flex items-center justify-between pl-6 pr-2">
+            <div className="bg-zinc-900/90 backdrop-blur-xl border border-white/10 p-1.5 sm:p-2 rounded-full shadow-2xl flex items-center justify-between pl-4 sm:pl-6 pr-1.5 sm:pr-2">
                 <div className="flex flex-col">
-                    <p className="text-white font-bold text-sm">Can't decide a track?</p>
-                    <p className="text-zinc-500 text-[10px]">Talk to a mentor for free.</p>
+                    <p className="text-white font-bold text-[11px] sm:text-sm leading-tight">Need Career Guidance?</p>
+                    <p className="text-zinc-500 text-[9px] sm:text-[10px] hidden sm:block">Talk to our industry experts.</p>
                 </div>
-                <button className="px-6 py-2.5 bg-white text-black font-bold text-xs rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-2">
-                    Book Counseling <ArrowRight size={14} />
+                <button 
+                  onClick={() => setIsDemoModalOpen(true)}
+                  className="px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold text-[10px] sm:text-xs rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-1.5 sm:gap-2 shadow-lg pointer-events-auto shrink-0"
+                >
+                    Book Counseling <ArrowRight size={14} className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
             </div>
         </div>
@@ -564,6 +571,13 @@ const [savedScroll, setSavedScroll] = useState(0); // <-- YOU MISSED THIS LINE!
         isOpen={!!selectedCourse} 
         onClose={handleCloseModal}
         course={selectedCourse} 
+      />
+      
+      <DemoBookingModal
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
+        defaultSource="junior-floating-bar"
+        title="Book Career Counseling"
       />
     </div>
   );

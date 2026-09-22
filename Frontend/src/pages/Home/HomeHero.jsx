@@ -64,10 +64,10 @@ const HomeHero = () => {
           {/* EVERGREEN SOCIAL PROOF */}
           <div className="flex items-center gap-4 pt-4">
             <div className="flex -space-x-3">
-              <img src="https://i.pravatar.cc/100?img=1" alt="Student" className="w-10 h-10 rounded-full border-2 border-black object-cover" />
-              <img src="https://i.pravatar.cc/100?img=5" alt="Student" className="w-10 h-10 rounded-full border-2 border-black object-cover" />
-              <img src="https://i.pravatar.cc/100?img=3" alt="Student" className="w-10 h-10 rounded-full border-2 border-black object-cover" />
-              <div className="w-10 h-10 rounded-full border-2 border-black bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-white z-10">+5k</div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs" aria-label="TechMines Student - Junior Builder">A</div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-xs" aria-label="TechMines Student - Senior Developer">R</div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs" aria-label="TechMines Student - Robotics Engineer">M</div>
+              <div className="w-10 h-10 rounded-full border-2 border-black bg-zinc-800 flex items-center justify-center text-[10px] font-bold text-white z-10" aria-label="Over 5,000 students enrolled">+5k</div>
             </div>
             <p className="text-sm text-zinc-400">
               Trusted by <span className="text-white font-medium">5,000+ parents & students</span> across top schools.

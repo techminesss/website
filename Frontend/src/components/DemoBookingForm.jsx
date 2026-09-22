@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   User, Phone, Mail, BookOpen, GraduationCap,
   Building2, MessageSquare, ArrowUpRight, Loader2, CheckCircle2,
@@ -11,7 +11,7 @@ import {
   DEMO_LEVEL_OPTIONS,
 } from "../config/demoBooking";
 
-const DemoBookingForm = ({ defaultSource = "home", defaultCourse = "", compact = false }) => {
+const DemoBookingForm = ({ isOpen, defaultSource = "home", defaultCourse = "", compact = false }) => {
   const [formData, setFormData] = useState({
     ...DEMO_BOOKING_DEFAULTS,
     source: defaultSource,
@@ -21,6 +21,17 @@ const DemoBookingForm = ({ defaultSource = "home", defaultCourse = "", compact =
   const [fieldErrors, setFieldErrors] = useState({});
   const [formError, setFormError] = useState("");
   const [formSuccess, setFormSuccess] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        setFormError("");
+        setFormSuccess("");
+        setFieldErrors({});
+        setFormData({ ...DEMO_BOOKING_DEFAULTS, source: defaultSource, courseInterest: defaultCourse });
+      }, 0);
+    }
+  }, [isOpen, defaultSource, defaultCourse]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

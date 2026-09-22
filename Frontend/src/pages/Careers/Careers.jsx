@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
@@ -36,6 +36,33 @@ const Careers = () => {
   const [submitting, setSubmitting] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
   const [formError, setFormError] = useState("");
+
+  useEffect(() => {
+    if (applicationModalJob) {
+      document.body.style.overflow = "hidden";
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormError("");
+        setFieldErrors({});
+        setFormData({
+          fullName: "", email: "", phone: "",
+          portfolio: "", experience: "", resume: null,
+          coverNote: "", website: ""
+        });
+      }, 0);
+
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") setApplicationModalJob(null);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "unset";
+      };
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [applicationModalJob]);
 
   const departments = [
     { id: "all", label: "All Openings" },
@@ -441,11 +468,15 @@ const Careers = () => {
       {/* 5. APPLICATION MODAL */}
       <AnimatePresence>
         {applicationModalJob && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+            onClick={() => setApplicationModalJob(null)}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
               className="bg-[#0a0a0a] border border-zinc-800 rounded-[2rem] max-w-xl w-full p-8 relative shadow-2xl overflow-y-auto max-h-[90vh]"
             >
               <div className="flex items-start justify-between mb-6">

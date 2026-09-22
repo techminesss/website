@@ -52,7 +52,7 @@ const Navbar = () => {
       ]
     },
 
-    { name: 'Showcase', path: '/Showcase', icon: <Briefcase size={18} /> },
+    { name: 'Showcase', path: '/showcase', icon: <Briefcase size={18} /> },
     { name: 'Careers', path: '/careers', icon: <Briefcase size={18} /> },
     { name: 'Contact', path: '/contact', icon: <Mail size={18} /> },
   ];
@@ -143,12 +143,7 @@ const Navbar = () => {
                 Book Free Class
             </button>
 
-            {/* Social Icons (Restored) */}
-            <div className="flex items-center gap-5 text-gray-500 xl:hidden 2xl:flex">
-               <a href="#" className="hover:text-[#ff5e00] hover:-translate-y-1 transition-all"><Twitter size={18} /></a>
-               <a href="#" className="hover:text-[#ff5e00] hover:-translate-y-1 transition-all"><Instagram size={18} /></a>
-               <a href="#" className="hover:text-[#ff5e00] hover:-translate-y-1 transition-all"><Facebook size={18} /></a>
-            </div>
+
           </div>
 
           {/* --- MOBILE TOGGLE --- */}
@@ -217,11 +212,7 @@ const Navbar = () => {
                 </button>
             </div>
             
-            <div className="mt-auto pt-8 flex justify-center gap-8 text-gray-500">
-               <a href="#" className="hover:text-[#ff5e00] transition-colors"><Twitter size={20} /></a>
-               <a href="#" className="hover:text-[#ff5e00] transition-colors"><Instagram size={20} /></a>
-               <a href="#" className="hover:text-[#ff5e00] transition-colors"><Facebook size={20} /></a>
-            </div>
+
         </div>
       </div>
       

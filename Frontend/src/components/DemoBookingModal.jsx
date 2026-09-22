@@ -75,6 +75,7 @@ const DemoBookingModal = ({
               {/* Scrollable Form */}
               <div className="overflow-y-auto flex-grow p-6 md:p-8 bg-[#050505]">
                 <DemoBookingForm
+                  isOpen={isOpen}
                   defaultSource={defaultSource}
                   defaultCourse={defaultCourse}
                   compact

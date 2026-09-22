@@ -67,7 +67,7 @@ const HomeCurriculum = () => {
     },
     {
       role: "Foundational AI & ML",
-      modalTitle: "Foundational AI & ML", 
+      modalTitle: "Generative AI & LLMs",
       subtitle: "AI & MACHINE LEARNING",
       image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
       icon: <BrainCircuit size={20} className="text-purple-400" />,

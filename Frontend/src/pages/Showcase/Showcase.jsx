@@ -260,15 +260,15 @@ const Showcase = () => {
       </section>
 
       {/* 4. INSIGHTS & BLOGS */}
-      <section className="py-24 px-6 max-w-7xl mx-auto border-t border-zinc-900">
+      <section id="blogs" className="py-24 px-6 max-w-7xl mx-auto border-t border-zinc-900">
          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
                <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">TechMines Updates</h2>
                <p className="text-zinc-500 text-lg">Latest news, articles, and insights from our team.</p>
             </div>
-            <button className="px-6 py-3 bg-zinc-900 border border-zinc-800 text-white font-bold rounded-xl hover:bg-zinc-800 transition-colors flex items-center gap-2">
+            <a href="#blogs" className="px-6 py-3 bg-zinc-900 border border-zinc-800 text-white font-bold rounded-xl hover:bg-zinc-800 transition-colors flex items-center gap-2">
                View All <ArrowUpRight size={16} />
-            </button>
+            </a>
          </div>
 
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -284,9 +284,9 @@ const Showcase = () => {
                      </div>
                      <h3 className="text-lg font-bold text-white mb-3 leading-snug">{post.title}</h3>
                      <p className="text-zinc-400 text-sm leading-relaxed mb-6">{post.desc}</p>
-                     <Link to="#" className="mt-auto text-sm text-blue-400 font-bold flex items-center gap-1.5 hover:gap-2.5 transition-all">
+                     <a href="#blogs" className="mt-auto text-sm text-blue-400 font-bold flex items-center gap-1.5 hover:gap-2.5 transition-all">
                         Read Article <ChevronRight size={16} />
-                     </Link>
+                     </a>
                   </div>
                </div>
             ))}

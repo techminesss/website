@@ -122,7 +122,7 @@ const ForSchools = () => {
             <button onClick={() => document.getElementById('b2b-form').scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-zinc-200 transition-colors">
               Schedule Site Visit
             </button>
-            <button className="px-8 py-4 bg-zinc-900 border border-zinc-800 text-white font-bold rounded-xl hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
+            <button onClick={() => document.getElementById('b2b-form').scrollIntoView({ behavior: 'smooth' })} className="px-8 py-4 bg-zinc-900 border border-zinc-800 text-white font-bold rounded-xl hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2">
               <Download size={18} /> Download Lab Brochure
             </button>
           </div>

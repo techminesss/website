@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import DemoBookingModal from '../../components/DemoBookingModal';
 
 // Placeholder images - replace with your actual imports
 const headerimg1 = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=1200&fit=crop"
@@ -11,6 +12,7 @@ import Services from './Services.jsx';
 export default function Header() {
   // State to track if video is ready to play
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return (
     <>
@@ -50,7 +52,7 @@ export default function Header() {
               One byte at a time
             </p>
 
-            <button className="mt-10 rounded-full bg-[#ff5e00] px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#ff6f1a] hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(255,94,0,0.25)]">
+            <button onClick={() => setIsDemoModalOpen(true)} className="mt-10 rounded-full bg-[#ff5e00] px-10 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all hover:bg-[#ff6f1a] hover:scale-105 active:scale-95 shadow-[0_10px_30px_rgba(255,94,0,0.25)]">
               Get Started
             </button>
           </div>
@@ -63,13 +65,7 @@ export default function Header() {
                <span className="text-[#ff5e00]">powerful stories</span>
              </h2>
 
-             <div className="flex gap-6 text-[11px] font-bold tracking-[0.2em] text-white/50 uppercase">
-               {['TWITTER', 'BEHANCE', 'INSTAGRAM'].map((link) => (
-                 <a key={link} href="#" className="hover:text-[#ff5e00] transition-colors duration-300">
-                   {link}
-                 </a>
-               ))}
-             </div>
+
           </div>
         </div>
 
@@ -134,6 +130,7 @@ export default function Header() {
       </div>
     </header>
     <Services />
+    <DemoBookingModal isOpen={isDemoModalOpen} onClose={() => setIsDemoModalOpen(false)} defaultSource="about-hero" />
     </>
   )
 }

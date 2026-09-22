@@ -187,7 +187,7 @@ const Contact = () => {
                              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <Building2 size={16} className="text-blue-500" />
                              </div>
-                              <input type="text" name="institution" required onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-blue-500/30 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="Name of your organization" />
+                              <input type="text" name="institution" required value={formData.institution} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-blue-500/30 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="Name of your organization" />
                            </div>
                            {fieldErrors.institution && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.institution}</p>}
                         </motion.div>

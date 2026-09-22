@@ -18,7 +18,7 @@ const MeetTheFounders = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* LEFT SIDE: Staggered Dual-Profile Grid */}
-          <div className="grid grid-cols-2 gap-6 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative max-w-xs mx-auto sm:max-w-none">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-orange-500/20 blur-[100px] rounded-full pointer-events-none" />
 
@@ -26,9 +26,8 @@ const MeetTheFounders = () => {
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="space-y-4 mt-12 relative z-10"
+              className="space-y-4 sm:mt-12 relative z-10"
             >
               <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-zinc-800/80 shadow-2xl bg-zinc-900">
                 <img 

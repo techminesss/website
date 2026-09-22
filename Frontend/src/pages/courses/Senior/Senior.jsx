@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { 
   BrainCircuit, ShieldCheck, Code2, Database, 
   Server, TrendingUp, ArrowRight, PlayCircle 
 } from "lucide-react";
 import CourseModal from "../CourseModal"; 
+import DemoBookingModal from "../../../components/DemoBookingModal";
 
 const SeniorCard = ({ title, tool, shortDesc, image, gradient, tag, onClick }) => {
   return (
@@ -49,7 +50,11 @@ const SeniorCard = ({ title, tool, shortDesc, image, gradient, tag, onClick }) =
 
 const SeniorSyllabus = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [returnPath, setReturnPath] = useState(null);
+  const [savedScroll, setSavedScroll] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   const tracks = [
     {
@@ -492,11 +497,28 @@ const SeniorSyllabus = () => {
       });
 
       if (foundCourse) {
-        setSelectedCourse(foundCourse);
+        setTimeout(() => {
+          setSelectedCourse(foundCourse);
+          if (location.state.returnPath) {
+             setReturnPath(location.state.returnPath);
+          }
+          if (location.state.savedScroll !== undefined) {
+             setSavedScroll(location.state.savedScroll); 
+          }
+        }, 0);
+        
         window.history.replaceState({}, document.title); // Clears state
       }
     }
   }, [location]);
+
+  const handleCloseModal = () => {
+    setSelectedCourse(null); 
+    if (returnPath) {
+      navigate(returnPath, { state: { restoreScroll: savedScroll } });
+      setReturnPath(null); 
+    }
+  };
 
   return (
     <div className="bg-zinc-950 min-h-screen text-white font-sans selection:bg-emerald-500 selection:text-black pb-32">
@@ -548,13 +570,16 @@ const SeniorSyllabus = () => {
 
       <div className="fixed bottom-8 left-0 right-0 z-50 px-6 pointer-events-none">
         <div className="max-w-xl mx-auto pointer-events-auto">
-            <div className="bg-zinc-900/90 backdrop-blur-xl border border-white/10 p-2 rounded-full shadow-2xl flex items-center justify-between pl-6 pr-2">
+            <div className="bg-zinc-900/90 backdrop-blur-xl border border-white/10 p-1.5 sm:p-2 rounded-full shadow-2xl flex items-center justify-between pl-4 sm:pl-6 pr-1.5 sm:pr-2">
                 <div className="flex flex-col">
-                    <p className="text-white font-bold text-sm">Need Career Guidance?</p>
-                    <p className="text-zinc-500 text-[10px]">Talk to our industry experts.</p>
+                    <p className="text-white font-bold text-[11px] sm:text-sm leading-tight">Need Career Guidance?</p>
+                    <p className="text-zinc-500 text-[9px] sm:text-[10px] hidden sm:block">Talk to our industry experts.</p>
                 </div>
-                <button className="px-6 py-2.5 bg-white text-black font-bold text-xs rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-2 shadow-lg">
-                    Book Counseling <ArrowRight size={14} />
+                <button 
+                  onClick={() => setIsDemoModalOpen(true)}
+                  className="px-4 py-2 sm:px-6 sm:py-2.5 bg-white text-black font-bold text-[10px] sm:text-xs rounded-full hover:bg-zinc-200 transition-colors flex items-center gap-1.5 sm:gap-2 shadow-lg pointer-events-auto shrink-0"
+                >
+                    Book Counseling <ArrowRight size={14} className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
             </div>
         </div>
@@ -562,8 +587,15 @@ const SeniorSyllabus = () => {
 
       <CourseModal 
         isOpen={!!selectedCourse} 
-        onClose={() => setSelectedCourse(null)} 
+        onClose={handleCloseModal} 
         course={selectedCourse} 
+      />
+      
+      <DemoBookingModal
+        isOpen={isDemoModalOpen}
+        onClose={() => setIsDemoModalOpen(false)}
+        defaultSource="senior-floating-bar"
+        title="Book Career Counseling"
       />
     </div>
   );
