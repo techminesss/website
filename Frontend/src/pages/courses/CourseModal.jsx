@@ -203,10 +203,7 @@ const CourseModal = ({ isOpen, onClose, course }) => {
               {/* FOOTER (Button changed to Brand Orange for UX consistency) */}
               <div className="p-4 border-t border-zinc-800 bg-zinc-950 shrink-0 z-20">
                 <button 
-                  onClick={() => {
-                    onClose();
-                    setIsDemoModalOpen(true);
-                  }}
+                  onClick={() => setIsDemoModalOpen(true)}
                   className="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-400 hover:to-amber-500 text-white font-bold rounded-xl shadow-lg shadow-orange-900/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                    Book Free Trial Class <ArrowRight size={16} />

@@ -46,14 +46,14 @@ const Navbar = () => {
       path: '/schools', 
       icon: <School size={18} />, 
       children: [
-        { name: 'Setup ATL Labs', path: '/schools/labs', icon: <Bot size={16}/> },
+        { name: 'Labs Setup', path: '/schools/labs', icon: <Bot size={16}/> },
         { name: 'Workshops', path: '/schools/workshops', icon: <Users size={16}/> },
         { name: 'FDP', path: '/schools/fdp', icon: <Users size={16}/> }
       ]
     },
 
     { name: 'Showcase', path: '/showcase', icon: <Briefcase size={18} /> },
-    { name: 'Careers', path: '/careers', icon: <Briefcase size={18} /> },
+    { name: 'Career', path: '/careers', icon: <Briefcase size={18} /> },
     { name: 'Contact', path: '/contact', icon: <Mail size={18} /> },
   ];
 
