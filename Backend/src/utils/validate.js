@@ -8,8 +8,8 @@
  * applies escapeHtml when interpolating into the HTML body.
  */
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[\d\s+\-]+$/;
+const EMAIL_RE = /^[^\s@]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const PHONE_RE = /^\d{10}$/;
 const URL_RE = /^https?:\/\/.+/i;
 
 // ── Helpers ─────────────────────────────────────────────────────────
@@ -51,8 +51,16 @@ function validateEmail(val) {
 function validatePhone(val) {
   const s = sanitize(val);
   if (!s) return 'Phone number is required';
-  if (s.length < 7 || s.length > 20) return 'Phone must be 7–20 characters';
-  if (!PHONE_RE.test(s)) return 'Phone may only contain digits, spaces, +, and -';
+  
+  // Extract only digits to check length
+  const digitsOnly = s.replace(/\D/g, '');
+  
+  // Let's check if the raw string matches the 10 digit requirement directly, 
+  // or if they provided country code. For strict 10 digits validation:
+  if (digitsOnly.length !== 10 && digitsOnly.length !== 12) {
+      return 'Phone number must be exactly 10 digits (excluding country code)';
+  }
+  
   return null;
 }
 
@@ -170,9 +178,20 @@ function validateLabsForm(body) {
   const phoneErr = validatePhone(body.phone);
   if (phoneErr) errors.phone = phoneErr;
 
-  // labType: accept any non-empty string (don't hardcode options)
-  const labErr = requireString(body.labType, 1, 200, 'Lab type');
-  if (labErr) errors.labType = labErr;
+  const LAB_TYPES = [
+    'ATAL Tinkering Lab',
+    'AI & Data Science',
+    'Advanced Robotics',
+    'IoT & Smart City',
+    'STEM Innovation',
+    'Custom Requirement',
+  ];
+
+  const labType = sanitize(body.labType);
+  if (!labType || !LAB_TYPES.includes(labType)) {
+    errors.labType = 'Select a valid lab configuration';
+  }
+
 
   const msgErr = validateOptionalText(body.message, 5000, 'Message');
   if (msgErr) errors.message = msgErr;
@@ -206,8 +225,18 @@ function validateWorkshopForm(body) {
   const phoneErr = validatePhone(body.phone);
   if (phoneErr) errors.phone = phoneErr;
 
-  const topicErr = requireString(body.workshopTopic, 1, 200, 'Workshop topic');
-  if (topicErr) errors.workshopTopic = topicErr;
+  const WORKSHOP_TOPICS = [
+    'Generative AI',
+    'Cyber Security',
+    'Robotics Bootcamp',
+    'App Development',
+  ];
+
+  const workshopTopic = sanitize(body.workshopTopic);
+  if (!workshopTopic || !WORKSHOP_TOPICS.includes(workshopTopic)) {
+    errors.workshopTopic = 'Select a valid workshop topic';
+  }
+
 
   const expectedStudents = sanitize(body.expectedStudents);
   if (!expectedStudents || !STUDENT_SIZES.includes(expectedStudents)) {
@@ -276,8 +305,21 @@ function validateDemoBookingForm(body) {
   const sourceErr = requireString(body.source, 1, 200, 'Source');
   if (sourceErr) errors.source = sourceErr;
 
-  const courseErr = requireString(body.courseInterest, 1, 200, 'Course interest');
-  if (courseErr) errors.courseInterest = courseErr;
+  // Values mirror Frontend/src/config/demoBooking.js
+  const DEMO_COURSE_OPTIONS = [
+    'Junior Coding',
+    'Senior Coding',
+    'AI & Robotics',
+    'Web Development',
+    'Game Development',
+    'General Demo Class',
+  ];
+
+  const courseInterest = sanitize(body.courseInterest);
+  if (!courseInterest || !DEMO_COURSE_OPTIONS.includes(courseInterest)) {
+    errors.courseInterest = 'Select a valid course interest';
+  }
+
 
   const msgErr = requireString(body.message, 2, 2000, 'Message');
   if (msgErr) errors.message = msgErr;
@@ -285,8 +327,20 @@ function validateDemoBookingForm(body) {
   const instErr = validateOptionalText(body.institution, 200, 'Institution');
   if (instErr) errors.institution = instErr;
 
-  const levelErr = validateOptionalText(body.studentLevel, 200, 'Student level');
-  if (levelErr) errors.studentLevel = levelErr;
+  // Values mirror Frontend/src/config/demoBooking.js
+  const DEMO_LEVEL_OPTIONS = [
+    '8-12 years',
+    '13-15 years',
+    '16+ years',
+    'School / College',
+    'Parent Inquiry',
+  ];
+
+  const studentLevel = sanitize(body.studentLevel);
+  if (studentLevel && !DEMO_LEVEL_OPTIONS.includes(studentLevel)) {
+    errors.studentLevel = 'Select a valid student level';
+  }
+
 
   return {
     errors: collectErrors(errors),

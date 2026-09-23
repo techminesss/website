@@ -168,7 +168,7 @@ const Contact = () => {
                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                           <UserCircle size={16} className="text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
                        </div>
-                        <input type="text" name="name" required value={formData.name} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="Applicant / Representative Name" />
+                        <input type="text" name="name" required minLength={2} maxLength={100} value={formData.name} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="Applicant / Representative Name" />
                      </div>
                      {fieldErrors.name && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.name}</p>}
                   </div>
@@ -187,7 +187,7 @@ const Contact = () => {
                              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                 <Building2 size={16} className="text-blue-500" />
                              </div>
-                              <input type="text" name="institution" required value={formData.institution} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-blue-500/30 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="Name of your organization" />
+                              <input type="text" name="institution" required minLength={2} maxLength={100} value={formData.institution} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-blue-500/30 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="Name of your organization" />
                            </div>
                            {fieldErrors.institution && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.institution}</p>}
                         </motion.div>
@@ -202,7 +202,7 @@ const Contact = () => {
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                            <Mail size={16} className="text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
                         </div>
-                         <input type="email" name="email" required value={formData.email} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="email@domain.com" />
+                         <input type="email" name="email" required maxLength={254} value={formData.email} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="email@domain.com" />
                      </div>
                      {fieldErrors.email && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.email}</p>}
                   </div>
@@ -212,7 +212,7 @@ const Contact = () => {
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                            <Phone size={16} className="text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
                         </div>
-                         <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="+91" />
+                         <input type="tel" name="phone" required minLength={10} maxLength={10} pattern="\d{10}" title="Phone number must be exactly 10 digits" value={formData.phone} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block pl-11 p-4 transition-all outline-none" placeholder="9876543210" />
                      </div>
                      {fieldErrors.phone && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.phone}</p>}
                   </div>
@@ -220,7 +220,7 @@ const Contact = () => {
 
               <div className="space-y-2">
                  <label className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest pl-1">Message Details</label>
-                  <textarea name="message" rows="4" required value={formData.message} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block p-4 transition-all resize-none outline-none" placeholder="Please provide specific details regarding your inquiry..."></textarea>
+                  <textarea name="message" rows="4" required minLength={2} maxLength={5000} value={formData.message} onChange={handleInputChange} className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-blue-500 focus:border-blue-500 block p-4 transition-all resize-none outline-none" placeholder="Please provide specific details regarding your inquiry..."></textarea>
                   {fieldErrors.message && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.message}</p>}
                </div>
 

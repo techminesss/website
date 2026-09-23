@@ -182,14 +182,36 @@ const Careers = () => {
       ? jobOpenings
       : jobOpenings.filter((job) => job.dept === selectedDepartment);
 
+  const MAX_RESUME_SIZE_MB = 5;
+
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    if (files) {
-      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+    if (files && files.length > 0) {
+      const file = files[0];
+      const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      
+      if (!validTypes.includes(file.type) && !file.name.match(/\.(pdf|doc|docx)$/i)) {
+        setFieldErrors((prev) => ({ ...prev, [name]: 'Only PDF, DOC, and DOCX files are accepted.' }));
+        e.target.value = ''; // clear the input
+        setFormData((prev) => ({ ...prev, [name]: null }));
+        return;
+      }
+      
+      if (file.size > MAX_RESUME_SIZE_MB * 1024 * 1024) {
+        setFieldErrors((prev) => ({ ...prev, [name]: `File must be smaller than ${MAX_RESUME_SIZE_MB}MB` }));
+        e.target.value = ''; // clear the input
+        setFormData((prev) => ({ ...prev, [name]: null }));
+        return;
+      }
+      
+      setFormData((prev) => ({ ...prev, [name]: file }));
+      setFieldErrors((prev) => ({ ...prev, [name]: "" }));
+    } else if (files) {
+      setFormData((prev) => ({ ...prev, [name]: null }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
+      if (fieldErrors[name]) setFieldErrors((prev) => ({ ...prev, [name]: "" }));
     }
-    if (fieldErrors[name]) setFieldErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleFormSubmit = async (e) => {
@@ -524,6 +546,8 @@ const Careers = () => {
                       type="text"
                       name="fullName"
                       required
+                      minLength={2}
+                      maxLength={100}
                       value={formData.fullName}
                       onChange={handleInputChange}
                       placeholder="Your Name"
@@ -541,6 +565,7 @@ const Careers = () => {
                         type="email"
                         name="email"
                         required
+                        maxLength={254}
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="you@domain.com"
@@ -556,9 +581,13 @@ const Careers = () => {
                         type="tel"
                         name="phone"
                         required
+                        minLength={10}
+                        maxLength={10}
+                        pattern="\d{10}"
+                        title="Phone number must be exactly 10 digits"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        placeholder="+91"
+                        placeholder="9876543210"
                         className="w-full bg-zinc-950 border border-zinc-800 text-white text-sm rounded-xl px-4 py-3 outline-none focus:border-[#ff5e00] transition-colors"
                       />
                       {fieldErrors.phone && <p className="text-red-400 text-sm mt-1">{fieldErrors.phone}</p>}
@@ -587,6 +616,7 @@ const Careers = () => {
                       <input
                         type="text"
                         name="experience"
+                        maxLength={5000}
                         value={formData.experience}
                         onChange={handleInputChange}
                         placeholder="e.g. 1.5 Years"
@@ -624,6 +654,7 @@ const Careers = () => {
                     <textarea
                       name="coverNote"
                       rows="3"
+                      maxLength={5000}
                       value={formData.coverNote}
                       onChange={handleInputChange}
                       placeholder="Share why you'd like to build with TechMines..."

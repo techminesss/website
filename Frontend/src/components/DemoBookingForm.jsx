@@ -100,6 +100,8 @@ const DemoBookingForm = ({ isOpen, defaultSource = "home", defaultCourse = "", c
               type="text"
               name="name"
               required
+              minLength={2}
+              maxLength={100}
               value={formData.name}
               onChange={handleInputChange}
               className={inputBase}
@@ -119,10 +121,14 @@ const DemoBookingForm = ({ isOpen, defaultSource = "home", defaultCourse = "", c
               type="tel"
               name="phone"
               required
+              minLength={10}
+              maxLength={10}
+              pattern="\d{10}"
+              title="Phone number must be exactly 10 digits"
               value={formData.phone}
               onChange={handleInputChange}
               className={inputBase}
-              placeholder="+91"
+              placeholder="9876543210"
             />
           </div>
           {fieldErrors.phone && <p className="text-red-400 text-sm mt-1 pl-1">{fieldErrors.phone}</p>}
@@ -140,6 +146,7 @@ const DemoBookingForm = ({ isOpen, defaultSource = "home", defaultCourse = "", c
             type="email"
             name="email"
             required
+            maxLength={254}
             value={formData.email}
             onChange={handleInputChange}
             className={inputBase}
@@ -205,6 +212,7 @@ const DemoBookingForm = ({ isOpen, defaultSource = "home", defaultCourse = "", c
           <input
             type="text"
             name="institution"
+            maxLength={200}
             value={formData.institution}
             onChange={handleInputChange}
             className={inputBase}
@@ -225,6 +233,8 @@ const DemoBookingForm = ({ isOpen, defaultSource = "home", defaultCourse = "", c
             name="message"
             rows={compact ? 3 : 4}
             required
+            minLength={2}
+            maxLength={2000}
             value={formData.message}
             onChange={handleInputChange}
             className="w-full bg-[#0a0a0a] border border-zinc-800 text-white text-sm rounded-xl focus:ring-1 focus:ring-orange-500 focus:border-orange-500 block pl-11 p-4 transition-all resize-none outline-none"
