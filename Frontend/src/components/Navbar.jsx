@@ -6,7 +6,7 @@ import {
   Twitter, Facebook, Instagram,
   Gamepad2, Code, Cpu, School, Bot, Users // New Icons
 } from 'lucide-react';
-import logo from '../assets/Logo.png';
+import logo from '../assets/Logo.webp';
 import DemoBookingModal from './DemoBookingModal';
 
 const Navbar = () => {

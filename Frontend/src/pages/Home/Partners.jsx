@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, Award } from "lucide-react";
-import AnshuAneja from "../../assets/Anshu_Aneja.jpg";
-import RavneetSingh from "../../assets/Ravneet_Singh.jpeg";
+import AnshuAneja from "../../assets/Anshu_Aneja.webp";
+import RavneetSingh from "../../assets/Ravneet_Singh.webp";
 
 const HIGHLIGHTS = [
   "Industry Experience",

@@ -6,7 +6,7 @@ const headerimg1 = "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158
 const headerimg2 = "https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&h=600&fit=crop"
 
 // We use the imported image/video for the bottom-right slot
-import headerimg3 from '../../assets/header-2-2-2.png'
+import headerimg3 from '../../assets/header-2-2-2.webp'
 import headermp3 from '../../assets/header-3.mp4'
 import Services from './Services.jsx';
 export default function Header() {
